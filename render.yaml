@@ -15,5 +15,6 @@ services:
       - key: VITE_API_BASE_URL
         value: https://srybal-reciptor-api.onrender.com
     routes:
-      - source: /*
+      - type: rewrite
+        source: /*
         destination: /index.html
