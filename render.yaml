@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: srybal-reciptor-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+
+  - type: web
+    name: srybal-reciptor-web
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://srybal-reciptor-api.onrender.com
+    routes:
+      - source: /*
+        destination: /index.html
